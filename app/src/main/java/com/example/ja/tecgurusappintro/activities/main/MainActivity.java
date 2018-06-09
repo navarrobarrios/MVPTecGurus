@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     public static int REST_OPERATION = 0x03;
     public static int MULT_OPERATION = 0x02;
     public static int DIV_OPRATION = 0x04;
+    public static String USERNAME_KEY = "key_to_username";
     //endregion
     //endregion
 
@@ -76,6 +77,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
                 mPresenter.doOperation(DIV_OPRATION, mOperatorOne.getText().toString(), mOperatorTwo.getText().toString());
             }
         });
+
+        //region showLogin username
+        if (getIntent() != null && getIntent().hasExtra(USERNAME_KEY)){
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Bienvenido")
+                    .setMessage(getIntent().getStringExtra(USERNAME_KEY))
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    }).show();
+        }
+        //endregion
     }
     //endregion
 
