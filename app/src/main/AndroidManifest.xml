@@ -15,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <receiver android:name=".broadcastreceivers.OnChageReceiver">
+            <intent-filter >
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".activities.login.LoginActivity"
