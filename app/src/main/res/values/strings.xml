@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name" translatable="false">TecGurusAppIntro</string>
+    <string name="text_prueba">Boton Segundo de prueba</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="text_invalid_number">Número invalido</string>
+    <string name="text_result">Resultado: %s</string>
+    <string name="text_accept">Aceptar</string>
+    <string name="operation_success">Operacion realizada con exito.</string>
+    <string name="suma">Suma</string>
+    <string name="multiplicacion">Multiplicacion</string>
+    <string name="operator_one_text">Operador uno</string>
+    <string name="operator_two_text">Operador dos</string>
+    <string name="text_rest">Resta</string>
+    <string name="text_div">Divicion</string>
+</resources>
