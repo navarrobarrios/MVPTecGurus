@@ -5,13 +5,13 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ja.tecgurusappintro.R;
+import com.example.ja.tecgurusappintro.utils.AppStatus;
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View{
 
@@ -95,6 +95,18 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     //endregion
 
     //region MainActivityContract.View Methods
+
+    @Override
+    protected void onResume() {
+        AppStatus.appOnResumed();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AppStatus.appOnPaused();
+    }
     @Override
     public void showResult(double result) {
         new AlertDialog.Builder(MainActivity.this)

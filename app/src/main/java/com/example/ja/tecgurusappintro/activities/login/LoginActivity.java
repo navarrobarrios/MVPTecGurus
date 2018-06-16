@@ -1,7 +1,11 @@
 package com.example.ja.tecgurusappintro.activities.login;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -14,6 +18,7 @@ import android.widget.EditText;
 
 import com.example.ja.tecgurusappintro.R;
 import com.example.ja.tecgurusappintro.activities.main.MainActivity;
+import com.example.ja.tecgurusappintro.utils.AppStatus;
 
 
 /**
@@ -23,6 +28,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
     //region Variables
+    //region Static Variables
+    public static final String KEY_LOGIN_NOTIFICATION = "keyLoginNotification";
+    //endregion
+    //region Global Variables
+    private BroadcastReceiver mMyBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction() != null && intent.getAction().equals(context.getString(R.string.broadcats_name)))
+                checkIfIsFromANotification(intent);
+        }
+    };
+    //endregion
     //region Views
     private EditText mUsername;
     private TextInputLayout mUsernameInputLayout;
@@ -36,12 +53,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        IntentFilter intentFilter = new IntentFilter(getString(R.string.broadcats_name));
+        registerReceiver(mMyBroadcastReceiver, intentFilter);
         mUsername = findViewById(R.id.activity_login_username);
         mPassword = findViewById(R.id.activity_login_password);
         mUsernameInputLayout = findViewById(R.id.activity_login_username_layout);
         mPasswordInputLayout = findViewById(R.id.activity_login_password_layout);
-
 
         Button mEmailSignInButton = findViewById(R.id.activity_login_login_button);
 
@@ -99,7 +116,40 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        if (getIntent() != null)
+        checkIfIsFromANotification(getIntent());
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mMyBroadcastReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        AppStatus.appOnResumed();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AppStatus.appOnPaused();
+    }
+    //endregion
+
+    //region Local Methods
+    private void checkIfIsFromANotification(Intent intent){
+        if (intent.hasExtra(KEY_LOGIN_NOTIFICATION)){
+            String message = intent.getStringExtra(KEY_LOGIN_NOTIFICATION);
+           new AlertDialog.Builder(this)
+                    .setTitle(R.string.app_name)
+                    .setMessage(message)
+                    .show();
+        }
+    }
+    //endregion
 }
 

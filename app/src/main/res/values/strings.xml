@@ -17,4 +17,6 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+
+    <string name="broadcats_name">com.example.ja.tecgurusappintro.notification</string>
 </resources>

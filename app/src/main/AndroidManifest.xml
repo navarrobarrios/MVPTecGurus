@@ -15,9 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <receiver android:name=".broadcastreceivers.OnChageReceiver">
+        <receiver android:name="com.example.ja.tecgurusappintro.broadcastreceivers.OnChageReceiver">
             <intent-filter >
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".broadcastreceivers.OnAirplaneStatusChange" >
+            <intent-filter >
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
             </intent-filter>
         </receiver>
 
