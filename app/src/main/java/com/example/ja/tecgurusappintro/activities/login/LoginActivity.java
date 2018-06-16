@@ -11,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.ja.tecgurusappintro.R;
 import com.example.ja.tecgurusappintro.activities.main.MainActivity;
@@ -75,10 +77,10 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(openMainActivity);
                         LoginActivity.this.finish();
                     }else{
-                        mPasswordInputLayout.setError("Password incorrecto");
+                        mPasswordInputLayout.setError(getString(R.string.invalid_password));
                     }
                 }else{
-                    mUsernameInputLayout.setError("Usuario invalido");
+                    mUsernameInputLayout.setError(getString(R.string.invalid_user));
                 }
             }
         });
@@ -117,8 +119,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if (getIntent() != null)
-        checkIfIsFromANotification(getIntent());
+        if (getIntent() != null && getIntent().getExtras() != null)
+            checkIfIsFromANotification(getIntent());
     }
 
     @Override
@@ -129,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        showCustomToast();
         AppStatus.appOnResumed();
         super.onResume();
     }
@@ -149,6 +152,18 @@ public class LoginActivity extends AppCompatActivity {
                     .setMessage(message)
                     .show();
         }
+    }
+
+    private void showCustomToast(){
+        //region Custom Toast
+        Toast customToast = Toast.makeText(getApplicationContext(), R.string.custom_toast_text, Toast.LENGTH_SHORT);
+        customToast.setGravity(Gravity.CENTER, 0 ,0);
+        customToast.show();
+        //endregion
+
+        //region Normal Toast
+        Toast.makeText(this, R.string.normal_toast_text, Toast.LENGTH_SHORT).show();
+        //endregion
     }
     //endregion
 }

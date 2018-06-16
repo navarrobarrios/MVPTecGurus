@@ -81,9 +81,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         //region showLogin username
         if (getIntent() != null && getIntent().hasExtra(USERNAME_KEY)){
             new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("Bienvenido")
+                    .setTitle(R.string.welcome)
                     .setMessage(getIntent().getStringExtra(USERNAME_KEY))
-                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.text_accept, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();

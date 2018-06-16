@@ -16,7 +16,21 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
+    <string name="invalid_user">Usuario invalido</string>
+    <string name="invalid_password">Password incorrecto</string>
     <string name="prompt_password">Password</string>
 
+    <string name="custom_toast_text">Custom Toast</string>
+    <string name="normal_toast_text">Normal Toast</string>
+
+    <string name="welcome">Bienvenido</string>
+    <string name="tec_gurus">Tec Gurus</string>
+    <string name="airplane_mode_changed">El modo avion cambio&#8230;</string>
+    <string name="charger_connected">Cargador conectado&#8230;</string>
+    <string name="open">Abrir</string>
+
     <string name="broadcats_name">com.example.ja.tecgurusappintro.notification</string>
+
+    <string name="id_channel_notification">id_channel_notification</string>
+    <string name="name_channel_notification">Notificaciones Tec Gurus</string>
 </resources>

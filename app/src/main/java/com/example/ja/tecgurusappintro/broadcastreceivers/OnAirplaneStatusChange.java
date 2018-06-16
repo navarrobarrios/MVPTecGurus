@@ -18,6 +18,12 @@ import com.example.ja.tecgurusappintro.utils.AppStatus;
 
 public class OnAirplaneStatusChange extends BroadcastReceiver {
 
+    //region Variables
+    //region Static Variables
+    public static int ID_NOTIFICATION = 0x12;
+    //endregion
+    //endregion
+
     //region BroadcastReceiver Methods
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -29,7 +35,7 @@ public class OnAirplaneStatusChange extends BroadcastReceiver {
                 onAirplaneStatusChanged.putExtra(LoginActivity.KEY_LOGIN_NOTIFICATION, "OnAirplane Status Changed");
                 context.sendBroadcast(onAirplaneStatusChanged);
             }else{
-                sendNotification("Tec Gurus", "Holaaa!", context);
+                sendNotification(context.getString(R.string.tec_gurus), context.getString(R.string.airplane_mode_changed), context);
             }
         }
     }
@@ -38,11 +44,11 @@ public class OnAirplaneStatusChange extends BroadcastReceiver {
     //region Local Methods
     @SuppressWarnings("SameParameterValue")
     private void sendNotification(String title, String content, Context context){
-        String idChannel = "id_channel_tec_gurus";
+        String idChannel = context.getString(R.string.id_channel_notification);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         Intent openLoginActivity = new Intent(context, LoginActivity.class);
-        openLoginActivity.putExtra(LoginActivity.KEY_LOGIN_NOTIFICATION, "Airplain Mode Changed");
+        openLoginActivity.putExtra(LoginActivity.KEY_LOGIN_NOTIFICATION, context.getString(R.string.airplane_mode_changed));
 
         PendingIntent openLogin = PendingIntent.getActivity(context, 0, openLoginActivity, PendingIntent.FLAG_CANCEL_CURRENT);
 
@@ -53,7 +59,7 @@ public class OnAirplaneStatusChange extends BroadcastReceiver {
                         .setContentTitle(title)
                         .setContentText(content)
                         .setColor(context.getResources().getColor(R.color.colorPrimary))
-                        .addAction(new NotificationCompat.Action(0, "Abrir", openLogin ))
+                        .addAction(new NotificationCompat.Action(0, context.getString(R.string.open), openLogin ))
                         .setContentIntent(openLogin)
                         .setSound(defaultSoundUri);
 
@@ -66,14 +72,14 @@ public class OnAirplaneStatusChange extends BroadcastReceiver {
                 NotificationChannel notificationChannel =
                         new NotificationChannel(
                                 idChannel,
-                                "Notificaciones",
+                                context.getString(R.string.name_channel_notification),
                                 NotificationManager.IMPORTANCE_DEFAULT);
 
                 notificationManager.createNotificationChannel(notificationChannel);
             }
             //endregion
 
-            notificationManager.notify(12, notificationBuilder.build());
+            notificationManager.notify(ID_NOTIFICATION, notificationBuilder.build());
         }
 
     }
